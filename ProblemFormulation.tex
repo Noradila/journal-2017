@@ -1,0 +1,16 @@
+% This section appears superfluous and has been removed 
+
+\section{General Approach: Two Step Optimisation}
+\label{ProblemFormulation}
+
+The goals of MCRP are (i) to reduce interference experienced through use of multiple channels and (ii) maximise the network lifetime by reconfiguring the topology. 
+An initial version of Multichannel Cross-Layer Routing Protocol (MCRP) is introduced in~\cite{mcrp} but the version in this paper has extensive changes.  In particular this paper introduces the changes for energy based lifetime maximisation.
+
+\subsection{Maximise Lifetime}
+
+The network lifetime depends on various factors such as the network architecture and protocols, channel characteristics, energy consumption model and the network lifetime definition. In order to increase the network lifetime, these information regarding the channel and residual energy of the sensors should be exploited.
+Multichannel protocol not only could reduce the end to end delay, it also helps to ensure minimal packet retransmissions thus consume less energy during communications as the effect from multichannel. However, it is not for certain that the topology has the energy optimal routes as the channels would have different effect on the nodes. While the node uses a better channel than previously, another path from the node on the new channel might gives a better result. 
+Multichannel helps to maximise the throughput but it does not maximise the network lifetime.
+MCRP consumes less energy than in other cases as the effect from multichannel. 
+
+In order to increase the energy efficiency thus network lifetime, MCRP needs to reconstruct the topology based on the available energy of the nodes and the link conditions gradually to avoid breaking any current connectivity. The energy-based tree reconfiguration is described in Section \ref{OptimalTree} and the results show prolonged lifetime by 6.2 times more when the optimal tree is found in the 500 nodes network.
