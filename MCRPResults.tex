@@ -49,7 +49,9 @@ Packet loss emulation results for interference on a single channel RPL system ca
 \end{figure}
 
 
-To evaluate MCRP capabilities to cope with interference from many sources, thus channels, and to compare to an existing multichannel protocol Orchestra, the emulations were run where (i) the layout is fixed while the interference channels are chosen by random and (ii) all the nodes including the interference nodes are placed randomly in an area of $150m^2$.  In the fixed layout nodes were positioned in order that the fourteen nodes formed a tree where the LPBR has two children and each of those children has two children (four grand children) and each of those has two children (eight great grand children).
+To evaluate MCRP capabilities to cope with interference from many sources, thus channels, and to compare to an existing multichannel protocol Orchestra, the emulations were run where (i) the layout is fixed while the interference channels are chosen by random and (ii) all the nodes including the interference nodes are placed randomly.
+%in an area of $150m^2$.  In the fixed layout nodes were positioned in order that the fourteen nodes formed a tree where the LPBR has two children and each of those children has two children (four grand children) and each of those has two children (eight great grand children).
+In the fixed layout nodes were positioned so that they formed a precise tree with the LPBR having two nodes directly attached and each of these child nodes having two nodes attached and each of these having two grandchild nodes. This produced a total of fifteen nodes including the LPBR. This was achieved by placing nodes that were to connect 10 metres apart. This distance was chosen so that nodes could form a good connection to the nodes next to them in the tree but nodes two hops away were too far to connect. In the random layout nodes were placed by choosing a uniformly random location within a square of side 150 metres.
 In the experiments, Orchestra uses channel hopping on all 16 channels.  Interference is chosen randomly for the 16 channels so that 4 experience each of the interference conditions: no interference, mild interference, medium interfernce and extreme interference.
 
 
@@ -76,10 +78,10 @@ Node 6 and 7 route through node 3 to the LPBR. Nodes 6 and 7 must reconnect thro
 
 \begin{figure}
 \centering
-\subfigure[Initial tree]{\label{fig:r1}\includegraphics[trim=2cm 16cm 2cm 2cm, clip=true, totalheight=0.12\textheight]
+\subfigure[Initial tree]{\label{fig:r1}\includegraphics[trim=2cm 15cm 2cm 2cm, clip=true, totalheight=0.12\textheight]
 {figures/reconnection1.pdf}}        
 \hfill        
-\subfigure[Reconstructed tree when node 3 is undetected]{\label{fig:r2}\includegraphics[trim=2cm 16cm 2cm 2cm, clip=true, totalheight=0.12\textheight]
+\subfigure[Reconstructed tree when node 3 is undetected]{\label{fig:r2}\includegraphics[trim=2cm 15cm 2cm 2cm, clip=true, totalheight=0.12\textheight]
 {figures/reconnection2.pdf}}
 \caption{A simple tree to emulate the tree reconnection}
 \label{fig:reconnectionLayout}
