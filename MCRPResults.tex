@@ -18,7 +18,7 @@ The emulation has the following phases:
 \item 5-30 minutes -- interference nodes are switched on.  The MCRP tree building and reconfiguration begins.
 \item 30-60 minutes -- interference continues and nodes attempt to send data every 30--60 seconds.  The rate of successful transmission is measured.
 \end{enumerate}
-Measurement of losses in the tree building phase is not made since this phase would be an unrepresentative one off set up cost for any protocol.  It is performance in the steady state that is important since this should last for weeks or years rather than tens of minutes.
+Losses are not measured in the tree building phase since that represents a set up cost and it is performance in the steady state that is important since this should last for weeks or years rather than tens of minutes.
 
 The performance of MCRP is compared against the standard ContikiMAC with RPL and Orchestra to demonstrates MCRP abilities in dealing with external and intra interferences. 
 %Orchestra does not support RPL downwards routing due to limited memory in TelosB. It however, support the upwards traffic which is require in the experiments as all traffics are directed upwards towards the LPBR.
@@ -49,10 +49,10 @@ Packet loss emulation results for interference on a single channel RPL system ca
 \end{figure}
 
 
-To evaluate MCRP capabilities to cope with interference from many sources, thus channels, and to compare to an existing multichannel protocol Orchestra, the emulations were run where (i) the layout is fixed while the interference channels are chosen by random and (ii) all the nodes including the interference nodes are placed randomly.
+To evaluate MCRP capability to cope with multi-source interference we compare with an existing multichannel protocol Orchestra.  We emulate (i) fixed layout, random interference channels and (ii) random node layout, random interference channels.
 %in an area of $150m^2$.  In the fixed layout nodes were positioned in order that the fourteen nodes formed a tree where the LPBR has two children and each of those children has two children (four grand children) and each of those has two children (eight great grand children).
-In the fixed layout nodes were positioned so that they formed a precise tree with the LPBR having two nodes directly attached and each of these child nodes having two nodes attached and each of these having two grandchild nodes. This produced a total of fifteen nodes including the LPBR. This was achieved by placing nodes that were to connect 10 metres apart. This distance was chosen so that nodes could form a good connection to the nodes next to them in the tree but nodes two hops away were too far to connect. In the random layout nodes were placed by choosing a uniformly random location within a square of side 150 metres.
-In the experiments, Orchestra uses channel hopping on all 16 channels.  Interference is chosen randomly for the 16 channels so that 4 experience each of the interference conditions: no interference, mild interference, medium interference and extreme interference.
+In the fixed layout, nodes were positioned at least 10 metres apart so  only one tree was possible with the LPBR having two nodes directly attached and each of these child nodes having two nodes attached and each of these having two grandchild nodes. This produced a total of fifteen nodes including the LPBR.  10 metres was chosen so that nodes could form a good connection to the nodes next to them in the tree but nodes two hops away were too far to connect. In the random layout nodes were placed by choosing a uniformly random location within a square of side 150 metres.
+Interference is chosen randomly for the 16 channels so that 4 experience each of the interference conditions: no interference, mild interference, medium interference and extreme interference.  In the experiments, Orchestra uses channel hopping on all 16 channels. 
 
 
 Figure \ref{fig:layouts} show MCRP and Orchestra results for the fixed and random nodes layouts.  In these graphs (and all graphs in this paper, x-axis values are shifted slightly to avoid error bars overlaying).

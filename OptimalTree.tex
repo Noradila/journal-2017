@@ -1,12 +1,12 @@
 \section{Energy-based Tree Reconfiguration}
 \label{OptimalTree}
 
-The expected number of transmissions (ETX) is calculated by nodes in RPL.  In MCRP nodes are selected to minimise this and channels are changed to minimise interference. However this does not account for the remaining battery life of nodes.  To do this MCRP is extended to reconfigure tree partners to maximise network lifetime.  
+The expected number of transmissions (ETX) is calculated by nodes in RPL.  In MCRP nodes are selected to minimise this and channels are changed to minimise interference. However this does not account for the remaining battery life. Hence MCRP is extented to reconfigure the tree to maxmise lifetime.
 
 \subsection{Details of Tree Reconfiguration}
 
-The next step in the process is to rearrange the tree to maximise network lifetime.  In this paper we take the definition that network lifetime is the time from the network set up until the first node failure.  Therefore, maximising network lifetime can be considered to be the problem of maximising the minimum predicted node lifetime over all nodes.  We alter the topology to achieve this since node lifetime is a function of the number of messages it sends.  However arbitrary topology rearrangement is not possible since only some nodes are within communication range of others.  Instead we consider "swaps" where one node changes its parent to another node. 
-We limit the number of each node possible changes to swaps, which reduces the possible combinations and makes the problem local and tractable.
+The next step in the process is to rearrange the tree to maximise network lifetime.  In this paper we take the definition that network lifetime is the time from the network set up until the first node failure.  Therefore, maximising network lifetime is the problem of maximising the minimum predicted node lifetime over all nodes.  We alter the topology to achieve this since node lifetime is a function of the number of messages it sends.  However arbitrary topology rearrangement is not possible since only some nodes are within communication range of others.  Instead we only consider ``swaps" where one node changes its parent to another node. 
+This reduces possible combinations and makes the problem local and tractable.
 %The set of potential swaps is not large since not every node can see every other node.  Hence each node only has a small number of possible parents.  
 
 %It can be trivially shown that 
@@ -16,18 +16,17 @@ a single node changes its parent node (since a topology can be completely define
 
  %(a) swap the parent of node $i$, (b) swap the children of node $i$, and (c) swap the descendants of node $i$ that are not the children. However, swapping the parent of the minimum lifetime node does not improve the node lifetime as the number of children and descendants remain same. Thus, only option (b) and (c) are further investigated.  
 
-We next need an estimate of node lifetime.  Let $l_i$ be the current estimated lifetime of node $i$ (in arbitrary units).  This will be a function of the current energy and the number of messages it must send and receive.  Let $e_i$ represent the amount of energy remaining in the node (as a percentage of the total energy).  Let $d_i$ be the number of descendants, $t_{ij}$ represents the number of transmissions on average required to send a message from node $i$ to node $j$ (the ETX).  Let $p(i)$ be the node which is parent of $i$ and $c(i)$ be the set of children.  
-We make the simplifying assumption that each node generates messages destined for the LPBR at the same average rate and since this rate constant $R$ would appear in all equations it may be dropped.  Node $i$ will receive $d_i$ messages from its descendents and generate 1 message itself. These messages require $t_{ip(i)}$ retransmissions giving $(d_i + 1)t_{ip(i)}$ messages and retransmissions to send them to the parent.  Each $j$ in the child set $c(i)$ will similarly wish to send $d_j + 1$ messages to $i$ and these messages are repeated $t_{ji}$ times on average.  Assuming sending and receiving messages gives an equal drain on battery life we therefore have
+We next need an estimate of node lifetime.  Let $l_i$ be the current estimated lifetime of node $i$ (in arbitrary units).  This will be a function of the current energy and the number of messages it must send and receive.  Let $e_i$ represent the amount of energy remaining in the node (as a percentage of the total energy).  Let $d_i$ be the number of descendants, $t_{ij}$ represents the number of transmissions on average required to send a message from $i$ to $j$ (ETX).  Let $p(i)$ be the parent of $i$ and $c(i)$ be the children of $i$.  
+We assume that each node generates messages destined for the LPBR at the same average rate and since this rate constant $R$ would appear in all equations it may be dropped.  Node $i$ will receive $d_i$ messages from its descendents and generate 1 message itself. These messages require $t_{ip(i)}$ retransmissions giving $(d_i + 1)t_{ip(i)}$ messages and retransmissions to send them to the parent.  Each $j$ in the child set $c(i)$ will similarly wish to send $d_j + 1$ messages to $i$ and these are repeated $t_{ji}$ times on average.  Assuming sending and receiving messages gives an equal drain on battery life,
 \begin{equation}
-l_i = \frac{e_i}{{(d_i + 1)t_{ip(i)} + \sum_{j \in c(i)} (d_j + 1)t_{ji}}},
-\label{optimalEq}
+l_i = \frac{e_i}{{(d_i + 1)t_{ip(i)} + \sum_{j \in c(i)} (d_j + 1)t_{ji}}}.\label{optimalEq}
 \end{equation}
-no normalising constant is needed for the rate $R$ and for the cost of receiving/sending a message since $l_i$ is in arbitrary units.  If receiving a message has a different cost than sending a message then a normalising constant can be introduced before the sum.
+No normalising constant is needed for the rate $R$ and for the cost of receiving/sending a message since $l_i$ is in arbitrary units.  If receiving a message has a different cost than sending a message then a normalising constant can be introduced.
 
 A greedy algorithm is used to work out which swaps should be made in order.  This algorithm works as follows:
 \begin{enumerate}
 \item Calculate $l_i$ for all nodes.
-\item Find $i$ such that $l_i$ is minimal.  The node $i$ is the node that will run out of energy first and $l_i$ is the current network lifetime estimate.
+\item Find $\min_i l_i$.  This is the current network lifetime estimate.
 \item Create a set of possible swaps $S$ consisting of 
 \begin{enumerate}
 \item Swaps that move a non-child descendent of $i$ to be a direct child of $i$ (which may reduce the cost of messages to $i$ if that node now has reduced ETX).
